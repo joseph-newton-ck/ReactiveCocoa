@@ -23,7 +23,10 @@ let package = Package(
 
         .target(
             name: "ReactiveCocoa",
-            dependencies: ["ReactiveSwift", "ReactiveCocoaObjC"],
+            dependencies: [
+                .product(name: "ReactiveSwift", package: "ReactiveSwift"), 
+                .target(name: "ReactiveCocoaObjC")
+            ],
             path: "ReactiveCocoa"),
 
         .target(
@@ -33,10 +36,10 @@ let package = Package(
         .testTarget(
             name: "ReactiveCocoaTests",
             dependencies: [
-                "ReactiveCocoa",
-                "ReactiveCocoaObjCTestSupport",
-                "Quick",
-                "Nimble"
+                .target(name: "ReactiveCocoa"), 
+                .target(name: "ReactiveCocoaObjCTestSupport"), 
+                .product(name: "Quick", package: "Quick"),
+                .product(name: "Nimble", package: "Nimble"),
             ],
             path: "ReactiveCocoaTests"),
     ],
